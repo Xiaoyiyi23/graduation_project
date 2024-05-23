@@ -9,5 +9,7 @@
 
 系统启动方式：装好环境后，在Pycharm中启动Django框架，访问网址即可
 
-李天一
+另外的下载方式（度盘）：https://pan.baidu.com/s/14XnutfYfD3rVVPoSB35evg?pwd=echg 
+
+Tianyi Li
 2024年5月23日
