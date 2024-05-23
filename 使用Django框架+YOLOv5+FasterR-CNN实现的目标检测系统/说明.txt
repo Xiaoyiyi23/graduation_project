@@ -1,0 +1,13 @@
+简介：本系统是一个简易的Web应用，使用Django框架实现，内置YOLOv5和Faster R-CNN模型用以检测空中飞行的无人机
+
+环境：需要Django和Pytorch，其他详见环境目录，建议使用Anaconda虚拟环境。
+注：两个模型均基于Pytorch实现，因此可以运行在一个Pytorch环境中，但我的环境是CPU版本的Pytorch，如果是想使用NVIDIA独立显卡，请自行安装cuda等环境
+
+数据集：数据集是UAV（无人机）数据集，由于两个模型支持的数据集格式不同，因此放在各自模型的文件夹中，Faster R-CNN为VOCdevkit目录，YOLOv5为data目录
+
+预训练模型以及训完的模型：也放在各自模型的文件夹中，Faster R-CNN为model_data目录，YOLOv5为weights目录，模型信息请根据模型的命名自行辨别
+
+系统启动方式：装好环境后，在Pycharm中启动Django框架，访问网址即可
+
+李天一
+2024年5月23日

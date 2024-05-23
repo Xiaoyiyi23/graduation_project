@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小目标检测系统</title>
+    <link href="../../static/CSS/object_detection_style.css" rel="stylesheet">
+    <style>
+        /* 设置视频容器样式 */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .video-container video {
+            width: 680px; /* 修改视频框的宽度 */
+            height: 380px;
+            margin-right: 20px;
+        }
+
+        /* 添加标题样式 */
+        .video-title {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* 按钮样式居中 */
+        .buttons-container {
+            text-align: center;
+            margin-top: 40px; /* 调整按钮下移 */
+        }
+
+        .buttons-container button,
+        .buttons-container input[type="submit"] {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .buttons-container button:hover,
+        .buttons-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* 按钮水平排布 */
+        .buttons-container button,
+        .buttons-container input[type="submit"] {
+            display: inline-block;
+        }
+
+        /* 隐藏原生文件选择按钮 */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* 自定义样式的文件选择按钮 */
+        .custom-file-input {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        /* 当鼠标悬停在自定义文件选择按钮上时的样式 */
+        .custom-file-input:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>小目标检测系统</h1>
+
+    <div class="video-container">
+        <div>
+            <h2 class="video-title">原始视频</h2>
+            <video id="original-video" controls>
+                <source id="001" src="../../media/001.mp4" type="video/mp4">
+            </video>
+
+        </div>
+
+        <div>
+            <h2 class="video-title">目标检测视频</h2>
+            <video id="detected-video" controls>
+                <source id="002" src="../../media/002.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="buttons-container">
+        <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- 使用 label 元素来代替文件选择按钮 -->
+            <label for="file-upload" class="custom-file-input">选择文件</label>
+            <!-- 实际上隐藏的文件选择按钮 -->
+            <input id="file-upload" type="file" name="video_file" accept="video/*">
+            <button type="submit">视频上传</button>
+        </form>
+        <form id="startDetectForm" action="{% url 'start_detect' %}" method="post">
+            {% csrf_token %}
+            <select name="script">
+                <option value="YOLOv5">YOLOv5</option>
+                <option value="Faster-R-CNN">Faster-R-CNN</option>
+                <!-- 添加更多选项 -->
+            </select>
+            <input type="submit" value="目标检测">
+        </form>
+        <form id="clearcache" action="{% url 'clear_cache' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="清空缓存">
+        </form>
+        <form id="download_data" action="{% url 'download_data' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="下载数据">
+        </form>
+
+    </div>
+</body>
+</html>
